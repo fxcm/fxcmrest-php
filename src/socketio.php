@@ -197,6 +197,7 @@ class SocketIO extends \Evenement\EventEmitter {
 		if($package[1] === "2") {
 			$this->emit('data', [substr($package,2)]);
 		} else if ($package[1] === "0") {
+			$this->state = ConnectionState::CONNECTED;
 			$this->emit('connected');
 		} else if ($package[1] === "4") {
 			$this->emit('error', [substr($package,2)]);
