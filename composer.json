@@ -1,0 +1,18 @@
+{
+    "name": "fxcm/rest",
+    "type": "library",
+    "license": "MIT",
+
+    "require": {
+        "react/event-loop": "^1.0",
+        "react/socket": "^1.0",
+        "react/http-client": "^0.5.9",
+        "react/http": "^0.8.3"
+    },
+    
+    "autoload": {
+        "psr-4": {
+            "FxcmRest\\": [ "src/", "3rdParty/" ]
+        }
+    }
+}
