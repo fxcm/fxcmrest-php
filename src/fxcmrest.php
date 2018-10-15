@@ -22,7 +22,7 @@ class FxcmRest extends \Evenement\EventEmitter {
 		$this->socketIO->on('error', function($e) {
 			$this->emit('error', [$e]);
 		});
-		$this->socketIO->on('disconnected', function($e) {
+		$this->socketIO->on('disconnected', function() {
 			$this->emit('disconnected');
 		});
 	}
