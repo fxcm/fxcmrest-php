@@ -1,9 +1,14 @@
 {
 	"name": "fxcm/fxcmrest",
-	"description": "FXCM Rest API client library",
+	"description": "FXCM Rest API library for php",
 	"type": "library",
 	"license": "MIT",
-
+	"authors": [
+		{
+			"name": "Pawel Guz",
+			"email": "pguz@fxcm.com"
+		}
+	],
 	"require": {
 		"php": ">=7.0.2",
 		"react/event-loop": "^1.0",
