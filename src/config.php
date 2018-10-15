@@ -6,9 +6,9 @@ class Config {
 	
 	function __construct(array $arguments) {
 		$defaults = [
-			'protocol' => 'https',
+			'protocol' => Protocol::HTTPS,
 			'host' => '',
-			'port' => 0,
+			'port' => 443,
 			'path' => '',
 			'token' => '',
 			'autoreconnect' => false,
