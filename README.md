@@ -1,37 +1,86 @@
-## Welcome to GitHub Pages
+# FxcmRest-php
+FxcmRest is a library for event-driven trading with FXCM over RestAPI using ReactPHP.
 
-You can use the [editor on GitHub](https://github.com/fxcm-pguz/fxcm-pguz.github.io/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Requirements
+ - PHP 7.0.2+ 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Installation
+The recommended way to install FxcmRest is through Composer.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+This command will install the latest stable version:
+```bash
+$ composer require fxcm/fxcmrest
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Usage
+Main class of the library is \FxcmRest\FxcmRest. It must be instantiated with two objects:
+ - \React\EventLoop\LoopInterface
+ - \FxcmRest\Config
 
-### Jekyll Themes
+Configuration class \FxcmRest\Config must be instantiated with an array containing at least the two following parameters:
+ - host
+ - token
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fxcm-pguz/fxcm-pguz.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Configuration Parameters
+ - protocol - either (default) \FxcmRest\Protocol::HTTPS or \FxcmRest\Protocol::HTTP
+ - host - either 'api.fxcm.com' for Real accounts or 'api-demo.fxcm.com' for Demo accounts
+ - port - port number. 443 default
+ - token - 40 char hexadecimal string
 
-### Support or Contact
+### Functions
+ - connect() : null
+ - disconnect() : null
+ - socketID() : string
+ - request(\FxcmRest\HttpMethod $method, string $path, array $arguments, callable $callback) : null
+ - on(string $signalName, callable $callback) : null
+ 
+### Signals
+ - connected
+ - disconnected
+ - error
+ - (trading tables) - one of ()
+ - (price updates)
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Sample Code
+```php
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+$loop = \React\EventLoop\Factory::create();
+
+$config = new \FxcmRest\Config([
+	'host' => 'api-demo.fxcm.com',
+	'token' => 'YOUR_TOKEN',
+]);
+
+$counter = 0;
+$rest = new FxcmRest\FxcmRest($loop, $config);
+$rest->on('connected', function() use ($rest,&$counter) {
+	$rest->request('POST', '/subscribe',
+		['pairs' => 'EUR/USD'],
+		function($code, $data) use ($rest,&$counter) {
+			if($code === 200) {
+				$rest->on('EUR/USD', function($data) use ($rest,&$counter) {
+					echo "price update: {$data}\n";
+					$counter++;
+					if($counter === 5){
+						$rest->disconnect();
+					}
+				});
+			}
+		}
+	);
+});
+$rest->on('error', function($e) use ($loop) {
+	echo "socket error: {$e}\n";
+	$loop->stop();
+});
+$rest->on('disconnected', function() use ($loop) {
+	echo "FxcmRest disconnected\n";
+	$loop->stop();
+});
+$rest->connect();
+
+$loop->run();
+?>
+```
