@@ -5,7 +5,7 @@
 	"license": "MIT",
 
 	"require": {
-		"php": "^7.0.1",
+		"php": ">=7.0.2",
 		"react/event-loop": "^1.0",
 		"react/socket": "^1.0",
 		"react/http-client": "^0.5.9",
@@ -14,7 +14,8 @@
 	
 	"autoload": {
 		"psr-4": {
-			"FxcmRest\\": [ "src/", "3rdParty/" ]
+			"FxcmRest\\": ["src", "src/constants"],
+			"FxcmRest\\ThirdParty\\": "ThirdParty"
 		}
 	}
 }

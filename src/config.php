@@ -13,7 +13,7 @@ class Config {
 			'token' => '',
 			'autoreconnect' => false,
 		];
-		$this->config = checkParams($defaults, $arguments);
+		$this->config = Functions::checkParams($defaults, $arguments);
 		
 		if (!Protocol::isValidValue($this->protocol())) {
 			throw new \Exception("Config error: protocol not supported");
