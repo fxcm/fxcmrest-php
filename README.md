@@ -69,7 +69,7 @@ Registers a $callback for a signal of $signalName. For a list of signals and par
 `(EUR/USD,EUR/GBP,...)` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through `/subscribe`.
 
 ## Sample Code
-```php
+```php{% highlight c tabsize=4 %}
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
