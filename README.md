@@ -5,7 +5,7 @@ FxcmRest is a library for event-driven trading with FXCM over RestAPI using Reac
  - PHP 7.0.2+
 
 ## Installation
-The recommended way to install FxcmRest is through Composer.
+The recommended way to install FxcmRest is through [Composer](https://getcomposer.org/).
 
 This command will install the latest stable version:
 ```bash
@@ -14,17 +14,17 @@ $ composer require fxcm/fxcmrest
 
 ## Usage
 Main class of the library is \FxcmRest\FxcmRest. It must be instantiated with two objects:
- - \React\EventLoop\LoopInterface
- - \FxcmRest\Config
+ - ```\React\EventLoop\LoopInterface```
+ - ```\FxcmRest\Config```
 
 Configuration class \FxcmRest\Config must be instantiated with an array containing at least the two following parameters:
- - host
- - token
+ - ```host```
+ - ```token```
 
 ### Configuration Parameters
- - protocol - either (default) \FxcmRest\Protocol::HTTPS or \FxcmRest\Protocol::HTTP
- - host - either 'api.fxcm.com' for Real accounts or 'api-demo.fxcm.com' for Demo accounts
- - port - port number. 443 default
+ - protocol - either ```\FxcmRest\Protocol::HTTPS``` (default) or ```\FxcmRest\Protocol::HTTP```
+ - host - either ```"api.fxcm.com"``` for Real accounts or ```"api-demo.fxcm.com"``` for Demo accounts
+ - port - port number. ```443``` default
  - token - 40 char hexadecimal string
 
 ### Functions
