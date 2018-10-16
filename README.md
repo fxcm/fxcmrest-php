@@ -69,42 +69,42 @@ Registers a $callback for a signal of $signalName. For a list of signals and par
 `(EUR/USD,EUR/GBP,...)` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through `/subscribe`.
 
 ## Sample Code
-```php{% highlight c tabsize=4 %}
+```php
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
 $loop = \React\EventLoop\Factory::create();
 
 $config = new \FxcmRest\Config([
-	'host' => 'api-demo.fxcm.com',
-	'token' => 'YOUR_TOKEN',
+    'host' => 'api-demo.fxcm.com',
+    'token' => 'YOUR_TOKEN',
 ]);
 
 $counter = 0;
 $rest = new FxcmRest\FxcmRest($loop, $config);
 $rest->on('connected', function() use ($rest,&$counter) {
-	$rest->request('POST', '/subscribe',
-		['pairs' => 'EUR/USD'],
-		function($code, $data) use ($rest,&$counter) {
-			if($code === 200) {
-				$rest->on('EUR/USD', function($data) use ($rest,&$counter) {
-					echo "price update: {$data}\n";
-					$counter++;
-					if($counter === 5){
-						$rest->disconnect();
-					}
-				});
-			}
-		}
-	);
+    $rest->request('POST', '/subscribe',
+        ['pairs' => 'EUR/USD'],
+        function($code, $data) use ($rest,&$counter) {
+            if($code === 200) {
+                $rest->on('EUR/USD', function($data) use ($rest,&$counter) {
+                    echo "price update: {$data}\n";
+                    $counter++;
+                    if($counter === 5){
+                        $rest->disconnect();
+                    }
+                });
+            }
+        }
+    );
 });
 $rest->on('error', function($e) use ($loop) {
-	echo "socket error: {$e}\n";
-	$loop->stop();
+    echo "socket error: {$e}\n";
+    $loop->stop();
 });
 $rest->on('disconnected', function() use ($loop) {
-	echo "FxcmRest disconnected\n";
-	$loop->stop();
+    echo "FxcmRest disconnected\n";
+    $loop->stop();
 });
 $rest->connect();
 
