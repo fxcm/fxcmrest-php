@@ -32,20 +32,25 @@ Configuration class \FxcmRest\Config must be instantiated with an array containi
  connect() : null
  ```
  Opens a connection to the server. When connection is complete, `connected` signal will be emitted.
+ 
  ```php
  disconnect() : null
  ```
  Disconnects from the server. When disconnection is complete, `disconnected` signal will be emitted. 
+ 
  ```php
  socketID() : string
  ```
  If connected to the server, returns a string representing the socketID. If not connected, returns an empty string.
+ 
  ```php
  request(\FxcmRest\HttpMethod $method, string $path, array $arguments, callable $callback) : null
  ```
+ 
  Sends a http request to the server. When request is completed, $callback will be called with two parameters:
  - `int` representing HTTP status code. 200 for OK
  - `string` representing server answer body
+ 
  ```php
  on(string $signalName, callable $callback) : null
  ```
