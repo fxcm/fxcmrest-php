@@ -1,8 +1,8 @@
-# FxcmRest-php
+# FxcmRest
 FxcmRest is a library for event-driven trading with FXCM over RestAPI using ReactPHP.
 
 ## Requirements
- - PHP 7.0.2+ 
+ - PHP 7.0.2+
 
 ## Installation
 The recommended way to install FxcmRest is through Composer.
