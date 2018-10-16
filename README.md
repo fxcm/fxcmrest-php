@@ -14,28 +14,28 @@ $ composer require fxcm/fxcmrest
 
 ## Usage
 Main class of the library is \FxcmRest\FxcmRest. It must be instantiated with two objects:
- - ```\React\EventLoop\LoopInterface```
- - ```\FxcmRest\Config```
+ - `\React\EventLoop\LoopInterface`
+ - `\FxcmRest\Config`
 
 Configuration class \FxcmRest\Config must be instantiated with an array containing at least the two following parameters:
  - `host`
  - `token`
 
 ### Configuration Parameters
- - `protocol` - either ```\FxcmRest\Protocol::HTTPS``` (default) or ```\FxcmRest\Protocol::HTTP```
- - `host` - either ```"api.fxcm.com"``` for Real accounts or ```"api-demo.fxcm.com"``` for Demo accounts
- - `port` - port number. ```443``` default
+ - `protocol` - either `\FxcmRest\Protocol::HTTPS` (default) or `\FxcmRest\Protocol::HTTP`
+ - `host` - either `"api.fxcm.com"` for Real accounts or `"api-demo.fxcm.com"` for Demo accounts
+ - `port` - port number. `443` default
  - `token` - 40 char hexadecimal string
 
 ### Functions
  ```php
  connect() : null
  ```
- Opens a connection to the server. When connection is complete, ```connected``` signal will be emitted.
+ Opens a connection to the server. When connection is complete, `connected` signal will be emitted.
  ```php
  disconnect() : null
  ```
- Disconnects from the server. When disconnection is complete, ```disconnected``` signal will be emitted. 
+ Disconnects from the server. When disconnection is complete, `disconnected` signal will be emitted. 
  ```php
  socketID() : string
  ```
@@ -44,8 +44,8 @@ Configuration class \FxcmRest\Config must be instantiated with an array containi
  request(\FxcmRest\HttpMethod $method, string $path, array $arguments, callable $callback) : null
  ```
  Sends a http request to the server. When request is completed, $callback will be called with two parameters:
- - ```int``` representing HTTP status code. 200 for OK
- - ```string``` representing server answer body
+ - `int` representing HTTP status code. 200 for OK
+ - `string` representing server answer body
  ```php
  on(string $signalName, callable $callback) : null
  ```
@@ -53,15 +53,15 @@ Configuration class \FxcmRest\Config must be instantiated with an array containi
  
 ### Signals
 
- ```connected``` - Emitted when connection sequence is complete. After this socketID is valid and requests can be sent to the server. No parameters are passed.
+ `connected` - Emitted when connection sequence is complete. After this socketID is valid and requests can be sent to the server. No parameters are passed.
  
- ```disconnected``` - Emitted when connection to the server is closed. No parameters are passed.
+ `disconnected` - Emitted when connection to the server is closed. No parameters are passed.
  
- ```error``` - Emitted on errors. Passes error description as string.
+ `error` - Emitted on errors. Passes error description as string.
  
- ```[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]``` - Emmited on trading table changes. Passes table update contents as JSON string. Requires subscription through ```/trading/subscribe```.
+ `[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]` - Emmited on trading table changes. Passes table update contents as JSON string. Requires subscription through `/trading/subscribe`
  
- ```(EUR/USD,EUR/GBP,...)``` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through ```/subscribe```.
+ `(EUR/USD,EUR/GBP,...)` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through `/subscribe`.
 
 ## Sample Code
 ```php
