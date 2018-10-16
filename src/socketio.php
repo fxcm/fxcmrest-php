@@ -44,7 +44,7 @@ class SocketIO extends \Evenement\EventEmitter {
 		$request->on('response', [$this, 'handshakeResponse']);
 		$request->on('error', function (\Exception $e) {
 			$this->state = ConnectionState::CONNECTION_ERROR;
-			$this->emit('error', [$e]);
+			$this->emit('error', [$e->getMessage()]);
 		});
 		$request->end();
 	}
@@ -71,9 +71,9 @@ class SocketIO extends \Evenement\EventEmitter {
 		$this->socket->on('end', function () {
 			// echo 'ended';
 		});
-		$this->socket->on('error', function (Exception $e) {
+		$this->socket->on('error', function (\Exception $e) {
 			$this->state = ConnectionState::CONNECTION_ERROR;
-			$this->emit('error', [$e]);
+			$this->emit('error', [$e->getMessage()]);
 		});
 		$this->socket->on('close', function () {
 			$this->state = ConnectionState::DISCONNECTED;
@@ -221,7 +221,11 @@ class SocketIO extends \Evenement\EventEmitter {
 	}
 	
 	public function socketID() : string {
-		return $this->options->sid;
+		if($this->state === ConnectionState::CONNECTED) {
+			return $this->options->sid;
+		} else {
+			return "";
+		}
 	}
 }
 ?>
