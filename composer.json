@@ -3,6 +3,7 @@
 	"description": "FXCM Rest API library for php",
 	"type": "library",
 	"license": "MIT",
+	"homepage": "https://fxcm.github.io/fxcmrest-php/",
 	"authors": [
 		{
 			"name": "Pawel Guz",
