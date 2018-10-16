@@ -18,14 +18,14 @@ Main class of the library is \FxcmRest\FxcmRest. It must be instantiated with tw
  - ```\FxcmRest\Config```
 
 Configuration class \FxcmRest\Config must be instantiated with an array containing at least the two following parameters:
- - ```host```
- - ```token```
+ - `host`
+ - `token`
 
 ### Configuration Parameters
- - protocol - either ```\FxcmRest\Protocol::HTTPS``` (default) or ```\FxcmRest\Protocol::HTTP```
- - host - either ```"api.fxcm.com"``` for Real accounts or ```"api-demo.fxcm.com"``` for Demo accounts
- - port - port number. ```443``` default
- - token - 40 char hexadecimal string
+ - `protocol` - either ```\FxcmRest\Protocol::HTTPS``` (default) or ```\FxcmRest\Protocol::HTTP```
+ - `host` - either ```"api.fxcm.com"``` for Real accounts or ```"api-demo.fxcm.com"``` for Demo accounts
+ - `port` - port number. ```443``` default
+ - `token` - 40 char hexadecimal string
 
 ### Functions
  ```php
