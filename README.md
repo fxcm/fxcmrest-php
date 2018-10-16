@@ -57,11 +57,11 @@ Configuration class \FxcmRest\Config must be instantiated with an array containi
  
  ```disconnected``` - Emitted when connection to the server is closed. No parameters are passed.
  
- ```error``` - Emitted on errors. Passes \Exception.
+ ```error``` - Emitted on errors. Passes error description as string.
  
- ```[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]``` - Emmited on trading table changes. Requires subscription through ```/trading/subscribe```.
+ ```[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]``` - Emmited on trading table changes. Passes table update contents as JSON string. Requires subscription through ```/trading/subscribe```.
  
- ```(EUR/USD,EUR/GBP,...)``` - Emmited on price update. Requires subscription through ```/subscribe```.
+ ```(EUR/USD,EUR/GBP,...)``` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through ```/subscribe```.
 
 ## Sample Code
 ```php
