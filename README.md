@@ -58,15 +58,15 @@ Registers a $callback for a signal of $signalName. For a list of signals and par
  
 ### Signals
 
- `connected` - Emitted when connection sequence is complete. After this socketID is valid and requests can be sent to the server. No parameters are passed.
- 
- `disconnected` - Emitted when connection to the server is closed. No parameters are passed.
- 
- `error` - Emitted on errors. Passes error description as string.
- 
- `[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]` - Emmited on trading table changes. Passes table update contents as JSON string. Requires subscription through `/trading/subscribe`
- 
- `(EUR/USD,EUR/GBP,...)` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through `/subscribe`.
+`connected` - Emitted when connection sequence is complete. After this socketID is valid and requests can be sent to the server. No parameters are passed.
+
+`disconnected` - Emitted when connection to the server is closed. No parameters are passed.
+
+`error` - Emitted on errors. Passes error description as string.
+
+`[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]` - Emmited on trading table changes. Passes table update contents as JSON string. Requires subscription through `/trading/subscribe`
+
+`(EUR/USD,EUR/GBP,...)` - Emmited on price update. Passes the price update as a JSON string. Requires subscription through `/subscribe`.
 
 ## Sample Code
 ```php
