@@ -52,16 +52,16 @@ Configuration class \FxcmRest\Config must be instantiated with an array containi
  Registers a $callback for a signal of $signalName. For a list of signals and parameters that are passed with them please see Signals section.
  
 ### Signals
- ```connected```
- Emitted when connection sequence is complete. After this socketID is valid and requests can be sent to the server. No parameters are passed.
- ```disconnected```
- Emitted when connection to the server is closed. No parameters are passed.
- ```error```
- Emitted on errors. Passes \Exception.
- ```[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]```
- Emmited on trading table changes. Requires subscription through ```/trading/subscribe```.
- ```(EUR/USD,EUR/GBP,...)```
- Emmited on price update. Requires subscription through ```/subscribe```.
+
+ ```connected``` - Emitted when connection sequence is complete. After this socketID is valid and requests can be sent to the server. No parameters are passed.
+ 
+ ```disconnected``` - Emitted when connection to the server is closed. No parameters are passed.
+ 
+ ```error``` - Emitted on errors. Passes \Exception.
+ 
+ ```[Offer,OpenPosition,ClosedPosition,Account,Summary,Properties]``` - Emmited on trading table changes. Requires subscription through ```/trading/subscribe```.
+ 
+ ```(EUR/USD,EUR/GBP,...)``` - Emmited on price update. Requires subscription through ```/subscribe```.
 
 ## Sample Code
 ```php
