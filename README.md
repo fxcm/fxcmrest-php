@@ -13,6 +13,10 @@ $ composer require fxcm/fxcmrest
 ```
 
 ## Usage
+As FXCM Rest API requires you to keep Socket.IO connection open through the whole time it is used, this library must be run within a php script and not as part of php generated website.
+
+Interaction can be done either by using a console or through HTTP requests handled directly by the php script for example with `\React\HTTP`.
+
 Main class of the library is \FxcmRest\FxcmRest. It must be instantiated with two objects:
  - `\React\EventLoop\LoopInterface`
  - `\FxcmRest\Config`
