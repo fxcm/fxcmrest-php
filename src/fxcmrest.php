@@ -43,18 +43,21 @@ class FxcmRest extends \Evenement\EventEmitter {
 		$data = '';
 		$url = $this->config->url() . $path;
 		$arguments = http_build_query($arguments);
-		if ($method === HttpMethod::GET) {
-			$url .= "/?" . $arguments;
+		$headers =[
+			'User-Agent' => 'request',
+			'Accept' => 'application/json',
+			'Content-Type' => 'application/x-www-form-urlencoded',
+			'Authorization' => "Bearer {$this->socketIO->socketID()}{$this->config->token()}"
+		];
+		$end = "";
+		if ($method === HttpMethod::POST) {
+			$headers['Transfer-Encoding'] = 'chunked';
+			$arglen = dechex(strlen($arguments));
+			$end = "{$arglen}\r\n{$arguments}\r\n0\r\n\r\n";
+		} else if ($method === HttpMethod::GET && $arguments) {
+			$url .= "?" . $arguments;
 		}
-		$request = $this->httpClient->request($method, $url,
-			[
-				'User-Agent' => 'request',
-				'Accept' => 'application/json',
-				'Content-Type' => 'application/x-www-form-urlencoded',
-				'Transfer-Encoding' => 'chunked',
-				'Authorization' => "Bearer {$this->socketIO->socketID()}{$this->config->token()}"
-			],
-			'1.1');
+		$request = $this->httpClient->request($method, $url, $headers, '1.1');
 		$request->on('response', function ($response) use ($data, $callback) {
 			$response->on('data', function ($chunk) use (&$data) {
 				$data .= $chunk;
@@ -66,12 +69,7 @@ class FxcmRest extends \Evenement\EventEmitter {
 		$request->on('error', function (\Exception $e) use ($callback) {
 			$callback(0,$e);
 		});
-		if($method === HttpMethod::POST) {
-			$arglen = dechex(strlen($arguments));
-			$request->end("{$arglen}\r\n{$arguments}\r\n0\r\n\r\n");
-		} else {
-			$request->end();
-		}
+		$request->end($end);
 	}
 }
 ?>
