@@ -85,7 +85,7 @@ $config = new \FxcmRest\Config([
 ]);
 
 $counter = 0;
-$rest = new FxcmRest\FxcmRest($loop, $config);
+$rest = new \FxcmRest\FxcmRest($loop, $config);
 $rest->on('connected', function() use ($rest,&$counter) {
     $rest->request('POST', '/subscribe',
         ['pairs' => 'EUR/USD'],
