@@ -81,7 +81,7 @@ class SocketIO extends \Evenement\EventEmitter {
 		});
 		
 		$this->secKey = $this->generateSecKey();
-		$request = "GET /socket.io/?EIO=3&transport=websocket&sid={$this->options->sid} HTTP/1.1\r\n"
+		$request = "GET /socket.io/?EIO=3&transport=websocket&sid={$this->options->sid}&access_token={$this->config->token()} HTTP/1.1\r\n"
 			. "Host: {$this->config->host()}\r\n"
 			. "Upgrade: websocket\r\n"
 			. "Connection: Upgrade\r\n"
