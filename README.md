@@ -1,5 +1,5 @@
 # fxcmrest-php
-FXCM Rest API library for php
+
 ## Anouncement:
 Dear client:  
 We are in the process of depreciating Rest API and the support is not expected to extend beyond Q1 next year 2023.
